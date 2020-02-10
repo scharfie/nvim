@@ -55,5 +55,5 @@ if (has("termguicolors"))
 endif
 
 color slate
-color palenight
-" color shades_of_purple
+silent! color palenight
+" silent! color shades_of_purple
