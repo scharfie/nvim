@@ -1,5 +1,6 @@
-#!/bin/zsh
-here=${0:A:h}
+#!/bin/bash
+# here=${0:A:h}
+here=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 base_path=$here/../
 
 export XDG_CONFIG_HOME="$base_path/config"

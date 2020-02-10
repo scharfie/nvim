@@ -1,18 +1,52 @@
-#!/bin/zsh
-here=${0:A:h}
+#!/bin/bash
+# here=${0:A:h}
+here=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 output_path=$here/../vendor/nvim
 
 [ -d $output_path ] || mkdir -p $output_path
 
-tag=`git ls-remote --refs --tags "https://github.com/neovim/neovim" | cut -f 2 | sed 's/refs\/tags\///' | fzf --header="Select neovim release tag:" --height=15`
+tag=$1
+
+if [ -z $tag ]
+then
+  tags=`git ls-remote --refs --tags "https://github.com/neovim/neovim" | cut -f 2 | sed 's/refs\/tags\///'`
+
+  if [ ! -z `which fzf` ]
+  then
+    tag=`echo "$tags" | fzf --header="Select neovim release tag:" --height=15`
+  else
+    echo "Select neovim release tag:"
+    select tag in $tags
+    do
+      break
+    done
+  fi
+fi
 
 [ ! -z $tag ] || exit
 
+platform=`uname`
+
+download_osx() {
+  echo Downloading neovim @ $tag for OSX...
+  curl -L -o nvim.tar.gz --silent \
+    "https://github.com/neovim/neovim/releases/download/$tag/nvim-macos.tar.gz" \
+    && tar --strip-components=1 -x -z -f nvim.tar.gz
+}
+
+download_linux() {
+  mkdir bin/
+  echo Downloading neovim @ $tag for Linux...
+  curl -L -o bin/nvim --silent \
+    "https://github.com/neovim/neovim/releases/download/$tag/nvim.appimage" \
+    && chmod u+x bin/nvim
+}
+
 cd $output_path
 
-echo Downloading neovim @ $tag for OSX...
-curl -L -o nvim.tar.gz --silent \
-	"https://github.com/neovim/neovim/releases/download/$tag/nvim-macos.tar.gz" \
-	&& tar --strip-components=1 -x -z -f nvim.tar.gz
+case $platform in
+  Linux) download_linux;;
+  Darwin) download_osx;;
+esac
 
 bin/nvim --version
