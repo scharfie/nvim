@@ -1,0 +1,16 @@
+#!/bin/zsh
+here=${0:A:h}
+output_path=$here/../vendor/nvim
+
+[ -d $output_path ] || mkdir -p $output_path
+
+tag=`git ls-remote --refs --tags "https://github.com/neovim/neovim" | cut -f 2 | sed 's/refs\/tags\///' | fzf`
+
+cd $output_path
+
+echo Downloading neovim @ $tag for OSX...
+curl -L -o nvim.tar.gz --silent \
+	"https://github.com/neovim/neovim/releases/download/$tag/nvim-macos.tar.gz" \
+	&& tar --strip-components=1 -x -z -f nvim.tar.gz
+
+bin/nvim --version

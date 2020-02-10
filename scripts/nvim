@@ -1,0 +1,6 @@
+#!/bin/zsh
+here=${0:A:h}
+base_path=$here/../
+
+export XDG_CONFIG_HOME="$base_path/config"
+$base_path/vendor/nvim/bin/nvim $*
