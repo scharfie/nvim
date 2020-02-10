@@ -4,7 +4,9 @@ output_path=$here/../vendor/nvim
 
 [ -d $output_path ] || mkdir -p $output_path
 
-tag=`git ls-remote --refs --tags "https://github.com/neovim/neovim" | cut -f 2 | sed 's/refs\/tags\///' | fzf`
+tag=`git ls-remote --refs --tags "https://github.com/neovim/neovim" | cut -f 2 | sed 's/refs\/tags\///' | fzf --header="Select neovim release tag:" --height=15`
+
+[ ! -z $tag ] || exit
 
 cd $output_path
 
