@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =9
+let g:netrw_dirhist_9='/Users/cscharf/Sites/igicom/hea-wordpress/wordpress/wp-content/plugins/HEA-CommonUtils/classes'
+let g:netrw_dirhist_8='/Users/cscharf/Sites/igicom/hea-wordpress/wordpress/wp-content/plugins/HEA-CommonUtils/classes/HEA'
+let g:netrw_dirhist_7='/Users/cscharf/Sites/igicom/nvim/config/nvim/plugged/html5.vim/syntax'
+let g:netrw_dirhist_6='/Users/cscharf/Sites/igicom/ladym/frontend'
+let g:netrw_dirhist_5='/Users/cscharf/.weechat/script'
+let g:netrw_dirhist_4='/Users/cscharf/Sites/igicom/hea-wordpress/wordpress/wp-content/plugins/HEA-MemberPortal/resources/views/widgets'
+let g:netrw_dirhist_3='/Users/cscharf/Sites/igicom/hea-wordpress/wordpress/wp-content/plugins/HEA-MemberPortal/resources/views'
+let g:netrw_dirhist_2='/Users/cscharf/Sites/igicom/hea-wordpress/wordpress/wp-content/plugins/HEA-MemberPortal/resources/views/account-security'
+let g:netrw_dirhist_1='/Users/cscharf/Sites/igicom/hea-wordpress/wordpress/wp-content/plugins/HEA-MemberPortal/resources/views'

@@ -1,0 +1,8 @@
+{
+  "solargraph.useBundler": false,
+  "solargraph.bundlerPath": "/Users/cscharf/.rbenv/shims/bundle",
+  "solargraph.promptDownload": false,
+  "solargraph.completion": true,
+  
+  "eslint.filetypes": ["javascript", "vue"]
+}

@@ -1,3 +1,4 @@
+" https://github.com/junegunn/fzf.vim
 " https://github.com/junegunn/fzf/wiki/Examples-(vim)
 " let g:fzf_layout = { 'window': 'enew' }
 " let s:default_layout = { 'down': '~40%' }
@@ -9,19 +10,19 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit' }
 
 " Customize fzf colors to match your color scheme
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+" let g:fzf_colors =
+" \ { 'fg':      ['fg', 'Normal'],
+"   \ 'bg':      ['bg', 'Normal'],
+"   \ 'hl':      ['fg', 'Comment'],
+"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"   \ 'hl+':     ['fg', 'Statement'],
+"   \ 'info':    ['fg', 'PreProc'],
+"   \ 'prompt':  ['fg', 'Conditional'],
+"   \ 'pointer': ['fg', 'Exception'],
+"   \ 'marker':  ['fg', 'Keyword'],
+"   \ 'spinner': ['fg', 'Label'],
+"   \ 'header':  ['fg', 'Comment'] }
 
 " \ 'source':  reverse(s:all_files()),
 command! FZFMru call fzf#run({
@@ -56,21 +57,21 @@ function! s:bufopen(e)
   execute 'buffer' matchstr(a:e, '^[ 0-9]*')
 endfunction
 
-command! FZFBuffers call fzf#run({
-  \   'source':  reverse(<sid>buflist()),
-  \   'sink':    function('<sid>bufopen'),
-  \   'options': '+m',
-  \   'down':    len(<sid>buflist()) + 2
-  \ })
+" command! FZFBuffers call fzf#run({
+"   \   'source':  reverse(<sid>buflist()),
+"   \   'sink':    function('<sid>bufopen'),
+"   \   'options': '+m',
+"   \   'down':    len(<sid>buflist()) + 2
+"   \ })
 
-command! FZFColor call fzf#run({
-  \   'source':
-  \     map(split(globpath(&rtp, "colors/*.vim"), "\n"),
-  \         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
-  \   'sink':    'colo',
-  \   'options': '+m',
-  \   'left':    30
-  \ })
+" command! FZFColor call fzf#run({
+"   \   'source':
+"   \     map(split(globpath(&rtp, "colors/*.vim"), "\n"),
+"   \         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
+"   \   'sink':    'colo',
+"   \   'options': '+m',
+"   \   'left':    30
+"   \ })
 
 function! s:fzf_related() 
   let basename = '"' . split(expand('%:t:r'), "_test")[0] . '"'
@@ -85,13 +86,14 @@ function! s:fzf_related()
 endfunction
 command! FZFRelated call s:fzf_related()
 
-command! FZFVimconfig call fzf#run({
-  \ 'dir':    stdpath('config'),
-  \ 'options': '-x',
-  \ 'sink':   'edit',
-  \ 'down':   '40%'
-  \ })
+" command! FZFVimconfig call fzf#run({
+"   \ 'dir':    stdpath('config'),
+"   \ 'options': '-x',
+"   \ 'sink':   'edit',
+"   \ 'down':   '40%'
+"   \ })
 
+command! -bang FZFVimconfig call fzf#vim#files(stdpath('config'), <bang>0)
 
 map <Leader>f :FZF<CR>
 
@@ -100,9 +102,9 @@ map <Leader>e :FZF %%<CR>
 
 map <Leader>a :FZFRelated<CR>
 map <Leader>r :FZFMru<CR>
-map <Leader>b :FZFBuffers<CR>
+map <Leader>b :Buffers<CR>
 map <Leader>v :FZFVimconfig<CR>
-map <Leader>c :FZFColor<CR>
+map <Leader>c :Colors<CR>
 
 
 " command! FZFRelated call fzf#run({
